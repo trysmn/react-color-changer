@@ -11,14 +11,14 @@ class App extends React.Component {
     super(props);
     this.state = {
       validColors: ["green", "red", "blue", "black", "white", "yellow", "pink"],
-      colorGivenByUser: ""
+      colorGivenByUser: "",
+      submitted: false
     };
-    this.handleColorChange = this.handleColorChange.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleColorChange(event) {
-    event.preventDefault();
-    console.log(event.target.value);
+  handleChange(event) {
     if(this.state.validColors.includes(event.target.value)) {
       console.log('its a valid color');
       this.setState({
@@ -29,17 +29,20 @@ class App extends React.Component {
     }
   }
 
-  handleColorImage(color) {
-    
+  handleSubmit(event) {
+    event.preventDefault();
+    this.setState({
+      submitted: true
+    });
   }
 
   render() {
     return (
       <div>
         <PowerRangerColorHeader />
-        <PowerRangerColorForm handleColorChange={this.handleColorChange}/>
-        <PowerRangerColorGreeting color={this.state.colorGivenByUser}/> 
-        <PowerRangerColorBox color={this.state.colorGivenByUser}/>
+        <PowerRangerColorForm handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
+        {this.state.submitted === true && <PowerRangerColorGreeting color={this.state.colorGivenByUser}/>}
+        {this.state.submitted === true && <PowerRangerColorBox color={this.state.colorGivenByUser}/>}
       </div>
     );
   }

@@ -1,11 +1,14 @@
 import React from 'react';
-import { Button, Form, Message } from 'semantic-ui-react';
+import { Button, Form } from 'semantic-ui-react';
 
 class PowerRangerColorForm extends React.Component {
     render() {
         return (
-          <Form error>
-            <Form.Input label='Choose your Power Ranger color:' placeholder="Who's your favourite Power Ranger" onChange={this.props.handleColorChange}/>
+          <Form onSubmit={this.props.handleSubmit}>
+            <Form.Field>
+                <label>Choose your Power Ranger color:</label>
+                <input placeholder="Who's your favourite Power Ranger" onChange={this.props.handleChange}/>
+            </Form.Field>
             <Button>Submit</Button>
           </Form>
         );
